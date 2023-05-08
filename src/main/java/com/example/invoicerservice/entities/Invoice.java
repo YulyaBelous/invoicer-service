@@ -1,5 +1,6 @@
 package com.example.invoicerservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -32,39 +33,33 @@ public class Invoice {
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
+    @JsonIgnoreProperties(value = { "address", "bankAccounts", "invoices" }, allowSetters = true)
     private Supplier supplier;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonIgnoreProperties(value = { "address", "bankAccounts", "invoices" }, allowSetters = true)
     private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "bank_account_supplier_id")
+    @JsonIgnoreProperties(value = { "invoicesCustomer", "invoicesSupplier" }, allowSetters = true)
     private BankAccount bankAccountSupplier;
 
     @ManyToOne
     @JoinColumn(name = "bank_account_customer_id")
+    @JsonIgnoreProperties(value = { "invoicesCustomer", "invoicesSupplier" }, allowSetters = true)
     private BankAccount bankAccountCustomer;
 
     @ManyToOne
     @JoinColumn(name = "address_supplier_id")
+    @JsonIgnoreProperties(value = { "invoicesCustomer", "invoicesSupplier" }, allowSetters = true)
     private Address addressSupplier;
 
     @ManyToOne
     @JoinColumn(name = "address_customer_id")
+    @JsonIgnoreProperties(value = { "invoicesCustomer", "invoicesSupplier" }, allowSetters = true)
     private Address addressCustomer;
-
-    public Invoice() {
-
-    }
-    public Invoice(Long id, String number, String description, Double unitPrice, Integer quantity, Double amount) {
-        this.id = id;
-        this.number = number;
-        this.description = description;
-        this.unitPrice = unitPrice;
-        this.quantity = quantity;
-        this.amount = amount;
-    }
 
     public Long getId() {
         return id;
@@ -129,6 +124,8 @@ public class Invoice {
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
+
+
 
     public Customer getCustomer() {
         return customer;

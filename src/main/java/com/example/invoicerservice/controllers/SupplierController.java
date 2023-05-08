@@ -29,6 +29,12 @@ public class SupplierController {
         return supplier.getId();
     }
 
+    @PutMapping("/suppliers/{id}")
+    public Long updateSupplier(@RequestBody Supplier supplier, @PathVariable("id") Long id) {
+        supplierRepository.save(supplier);
+        return supplier.getId();
+    }
+
     @DeleteMapping("/suppliers/{id}")
     private void deleteSupplier(@PathVariable("id") Long id)
     {

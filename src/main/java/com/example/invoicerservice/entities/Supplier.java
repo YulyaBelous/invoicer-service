@@ -1,5 +1,6 @@
 package com.example.invoicerservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -27,12 +28,15 @@ public class Supplier {
     private String taxCode;
 
     @OneToMany(mappedBy = "supplier")
+    @JsonIgnoreProperties(value = { "supplier", "customer" }, allowSetters = true)
     private Set<Invoice> invoices = new HashSet<>();
 
     @OneToMany(mappedBy = "supplier")
+    @JsonIgnoreProperties(value = { "supplier", "customer" }, allowSetters = true)
     private Set<Address> addresses = new HashSet<>();
 
     @OneToMany(mappedBy = "supplier")
+    @JsonIgnoreProperties(value = { "supplier", "customer" }, allowSetters = true)
     private Set<BankAccount> bankAccounts = new HashSet<>();
 
     public Long getId() {
@@ -98,5 +102,7 @@ public class Supplier {
     public void setBankAccounts(Set<BankAccount> bankAccounts) {
         this.bankAccounts = bankAccounts;
     }
+
+
 
 }

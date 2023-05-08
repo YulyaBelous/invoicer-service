@@ -1,6 +1,7 @@
 package com.example.invoicerservice.controllers;
 
 import com.example.invoicerservice.entities.Customer;
+import com.example.invoicerservice.entities.Supplier;
 import com.example.invoicerservice.repository.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,12 @@ public class CustomerController {
 
     @PostMapping("/customers")
     public Long createCustomer(@RequestBody Customer customer) {
+        customerRepository.save(customer);
+        return customer.getId();
+    }
+
+    @PutMapping("/customers/{id}")
+    public Long updateCustomer(@RequestBody Customer customer, @PathVariable("id") Long id) {
         customerRepository.save(customer);
         return customer.getId();
     }

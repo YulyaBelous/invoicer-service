@@ -1,6 +1,7 @@
 package com.example.invoicerservice.controllers;
 
 import com.example.invoicerservice.entities.Address;
+import com.example.invoicerservice.entities.Supplier;
 import com.example.invoicerservice.repository.IAddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,12 @@ public class AddressController {
 
     @PostMapping("/addresses")
     public Long createAddresses(@RequestBody Address address) {
+        addressRepository.save(address);
+        return address.getId();
+    }
+
+    @PutMapping("/addresses/{id}")
+    public Long updateAddress(@RequestBody Address address, @PathVariable("id") Long id) {
         addressRepository.save(address);
         return address.getId();
     }
