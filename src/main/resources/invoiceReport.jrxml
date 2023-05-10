@@ -11,24 +11,28 @@
     <field name="supplier.shortName"/>
     <field name="supplier.fullName"/>
     <field name="supplier.taxCode"/>
-    <field name="supplier.address.country"/>
-    <field name="supplier.address.city"/>
-    <field name="supplier.address.postCode"/>
-    <field name="supplier.address.streetLine1"/>
-    <field name="bankAccount.accountNumber"/>
-    <field name="bankAccount.addressLine"/>
-    <field name="bankAccount.swift" />
-    <field name="bankAccount.correspondentName" />
-    <field name="bankAccount.correspondentAddress" />
-    <field name="bankAccount.correspondentSwift"/>
+    <field name="addressSupplier.country"/>
+    <field name="addressSupplier.city"/>
+    <field name="addressSupplier.postCode"/>
+    <field name="addressSupplier.streetLine1"/>
+    <field name="bankAccountSupplier.bankName"/>
+    <field name="bankAccountSupplier.accountNumber"/>
+    <field name="bankAccountSupplier.address.country"/>
+    <field name="bankAccountSupplier.address.city"/>
+    <field name="bankAccountSupplier.address.postCode"/>
+    <field name="bankAccountSupplier.address.streetLine1"/>
+    <field name="bankAccountSupplier.swift" />
+    <field name="bankAccountSupplier.correspondentName" />
+    <field name="bankAccountSupplier.correspondentAddress" />
+    <field name="bankAccountSupplier.correspondentSwift"/>
     <field name="customer.name"/>
     <field name="customer.shortName"/>
     <field name="customer.fullName" />
     <field name="customer.taxCode"/>
-    <field name="customer.address.country"/>
-    <field name="customer.address.city"/>
-    <field name="customer.address.postCode" />
-    <field name="customer.address.streetLine1" />
+    <field name="addressCustomer.country"/>
+    <field name="addressCustomer.city"/>
+    <field name="addressCustomer.postCode" />
+    <field name="addressCustomer.streetLine1" />
     <title>
         <band height="80" splitType="Stretch">
             <line>
@@ -46,7 +50,7 @@
                 <textElement verticalAlignment="Top">
                     <font fontName="NewTimesNewRoman" size="10" isBold="true"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{supplier.address.country} + ", " + $F{supplier.address.postCode} + ", " + $F{supplier.address.city} + ", " + $F{supplier.address.streetLine1}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{addressSupplier.country} + ", " + $F{addressSupplier.postCode} + ", " + $F{addressSupplier.city} + ", " + $F{addressSupplier.streetLine1}]]></textFieldExpression>
             </textField>
         </band>
     </title>
@@ -192,8 +196,8 @@
                 <textElement verticalAlignment="Middle">
                     <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{customer.address.country} + ", " + $F{customer.address.postCode}
-                + ", " + $F{customer.address.city} + ", " + $F{customer.address.streetLine1}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{addressCustomer.country} + ", " + $F{addressCustomer.postCode}
+                + ", " + $F{addressCustomer.city} + ", " + $F{addressCustomer.streetLine1}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="295" y="76" width="234" height="14" uuid="13f28c4b-72df-4d9e-8aea-0c9d5e3a4403"/>
@@ -214,8 +218,8 @@
                 <textElement verticalAlignment="Middle">
                     <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{customer.address.country} + ", " + $F{customer.address.postCode}
-                + ", " + $F{customer.address.city} + ", " + $F{customer.address.streetLine1}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{addressCustomer.country} + ", " + $F{addressCustomer.postCode}
+                + ", " + $F{addressCustomer.city} + ", " + $F{addressCustomer.streetLine1}]]></textFieldExpression>
             </textField>
             <line>
                 <reportElement x="40" y="118" width="490" height="1" uuid="4f3133de-18de-4751-873d-c6b52a57b3fe"/>
@@ -371,7 +375,7 @@
                 <textElement verticalAlignment="Middle">
                     <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{supplier.address.country} + ", " + $F{supplier.address.postCode} + ", " + $F{supplier.address.city} + ", " + $F{supplier.address.streetLine1}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{addressSupplier.country} + ", " + $F{addressSupplier.postCode} + ", " + $F{addressSupplier.city} + ", " + $F{addressSupplier.streetLine1}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="150" y="217" width="371" height="14" uuid="d9854ae4-193f-4f0d-ae67-fd08c287cfc0"/>
@@ -413,28 +417,28 @@
                 <textElement verticalAlignment="Middle">
                     <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{bankAccount.accountNumber}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{bankAccountSupplier.accountNumber}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="150" y="245" width="371" height="14" uuid="6a748bed-dbd9-4947-8fc9-d033eb58148f"/>
                 <textElement verticalAlignment="Middle">
                     <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{bankAccount.bankName}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{bankAccountSupplier.bankName}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="150" y="259" width="371" height="14" uuid="08522c88-2d3b-408d-8fc3-26bbf966b1b3"/>
                 <textElement verticalAlignment="Middle">
                     <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{bankAccount.addressLine}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{bankAccountSupplier.address.country} + ", " + $F{bankAccountSupplier.address.postCode} + ", " + $F{bankAccountSupplier.address.city} + ", " + $F{bankAccountSupplier.address.streetLine1}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="150" y="273" width="371" height="14" uuid="0d225a40-76c9-4912-ab7b-b7a9771d8497"/>
                 <textElement verticalAlignment="Middle">
                     <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{bankAccount.swift}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{bankAccountSupplier.swift}]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="50" y="296" width="100" height="14" uuid="01143e2a-b788-4d0f-ae2e-d35eca0e4abb"/>
@@ -462,21 +466,21 @@
                 <textElement verticalAlignment="Middle">
                     <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{bankAccount.correspondentName}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{bankAccountSupplier.correspondentName}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="150" y="310" width="371" height="14" uuid="39a7ff21-95bb-46f2-9718-9253cf0dc521"/>
                 <textElement verticalAlignment="Middle">
                     <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{bankAccount.correspondentAddress}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{bankAccountSupplier.correspondentAddress}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="150" y="324" width="371" height="14" uuid="0fb7ce18-93c0-4e76-8ef7-04fcf51a71ea"/>
                 <textElement verticalAlignment="Middle">
                     <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{bankAccount.correspondentSwift}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{bankAccountSupplier.correspondentSwift}]]></textFieldExpression>
             </textField>
             <line>
                 <reportElement x="40" y="338" width="490" height="1" uuid="10a87bf1-13e0-4aa4-91d6-6d026dcfbdb1"/>
