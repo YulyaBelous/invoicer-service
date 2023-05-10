@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoiceReportNew"  topMargin="20" bottomMargin="20" uuid="c278cc41-afb2-4bef-a4ac-e5867eb8fb58">
+    <field name="id" class="java.lang.Long"/>
+    <field name="number"/>
+    <field name="date" class="java.time.LocalDate"/>
+    <field name="description"/>
+    <field name="unitPrice" class="java.lang.Double"/>
+    <field name="quantity" class="java.lang.Integer"/>
+    <field name="amount" class="java.lang.Double"/>
+    <field name="supplier.name"/>
+    <field name="supplier.shortName"/>
+    <field name="supplier.fullName"/>
+    <field name="supplier.taxCode"/>
+    <field name="supplier.address.country"/>
+    <field name="supplier.address.city"/>
+    <field name="supplier.address.postCode"/>
+    <field name="supplier.address.streetLine1"/>
+    <field name="bankAccount.accountNumber"/>
+    <field name="bankAccount.addressLine"/>
+    <field name="bankAccount.swift" />
+    <field name="bankAccount.correspondentName" />
+    <field name="bankAccount.correspondentAddress" />
+    <field name="bankAccount.correspondentSwift"/>
+    <field name="customer.name"/>
+    <field name="customer.shortName"/>
+    <field name="customer.fullName" />
+    <field name="customer.taxCode"/>
+    <field name="customer.address.country"/>
+    <field name="customer.address.city"/>
+    <field name="customer.address.postCode" />
+    <field name="customer.address.streetLine1" />
+    <title>
+        <band height="80" splitType="Stretch">
+            <line>
+                <reportElement x="40" y="50" width="300" height="1" uuid="87eb1644-ba02-46b4-b0b0-67c145262797"/>
+            </line>
+            <textField>
+                <reportElement x="50" y="19" width="230" height="30" uuid="bd667da7-10a7-42b0-9d99-1dd9ce551cda"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{supplier.fullName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="50" y="50" width="290" height="30" uuid="89ee27bb-b3f9-4e6b-8f5c-9e4960deb8f2"/>
+                <textElement verticalAlignment="Top">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{supplier.address.country} + ", " + $F{supplier.address.postCode} + ", " + $F{supplier.address.city} + ", " + $F{supplier.address.streetLine1}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="343" splitType="Stretch">
+            <staticText>
+                <reportElement x="-20" y="-5" width="300" height="30" uuid="e76baa69-d7e5-46f9-a08f-011f821ee75c"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Invoice/Інвойс                        ]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="280" y="-5" width="295" height="30" uuid="6eadd7e5-9a78-4fa1-a344-2777fbe58adb"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[ № ______________                           ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="294" y="-4" width="140" height="20" uuid="6c9ffbde-0d5c-4a29-bbef-b79d8975845d"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="41" y="31" width="490" height="1" uuid="22a9e508-cbe2-4d00-b3db-b42b92883cb3"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="50" y="32" width="130" height="14" uuid="cbf40275-c006-43e5-b0c1-4bdeb9b6434b"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Date of invoice:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="118" y="32" width="166" height="14" uuid="dbbbab16-31b1-4f3c-ae30-96a131e83203"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="284" y="32" width="1" height="130" uuid="aa61005c-363d-4974-a039-976880d83e16"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <line>
+                <reportElement x="40" y="31" width="1" height="307" uuid="777d10c5-3a7b-4da6-baa7-dc559d2b30a4"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <line>
+                <reportElement x="530" y="31" width="1" height="308" uuid="ddb2c860-be15-4f1d-9121-cd8cb50691ea"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="295" y="32" width="130" height="14" uuid="88eaf420-9fb4-4da9-8318-d85d83494086"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Дата інвойсу:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="359" y="32" width="170" height="14" uuid="52b2cc69-0dc4-4fcb-8821-8615f6ebae15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="50" y="47" width="130" height="14" uuid="c9d0585d-d51a-4f97-9734-09bc6a2fd473"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Supplier:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="92" y="47" width="192" height="14" uuid="3cdb12d0-8ef2-4446-b6a8-5a3e90f70c42"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{supplier.name}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="295" y="47" width="130" height="14" uuid="bab7444f-1305-4699-9329-c3a5a224b957"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Виконавець:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="355" y="47" width="174" height="14" uuid="0ed2412a-010a-47a7-a1b9-b801d3c50790"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{supplier.name}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="40" y="61" width="490" height="1" uuid="58b8d0e2-fdbb-4b08-9589-a48fa722b056"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="50" y="62" width="130" height="14" uuid="62e60e09-269a-44df-a029-65c5ebf765e0"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Customer:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="295" y="62" width="130" height="14" uuid="86de37e7-54f6-4dcc-8718-4269937189aa"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Замовник:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="50" y="76" width="230" height="14" uuid="d0878154-357f-4396-b850-ed6f14b0dc47"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{customer.fullName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="50" y="90" width="230" height="14" uuid="2cea9496-6547-406c-b965-dde8779685d3"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{customer.taxCode}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="50" y="104" width="230" height="14" uuid="562e3ae6-e7f9-4c41-b1e4-66288ad0062f"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{customer.address.country} + ", " + $F{customer.address.postCode}
+                + ", " + $F{customer.address.city} + ", " + $F{customer.address.streetLine1}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="295" y="76" width="234" height="14" uuid="13f28c4b-72df-4d9e-8aea-0c9d5e3a4403"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{customer.fullName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="295" y="90" width="234" height="14" uuid="c7c1e934-d899-4e02-9bea-e14d1e9bfdd1"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{customer.taxCode}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="295" y="104" width="234" height="14" uuid="a3816c11-796e-4348-b62b-5907435f54b4"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{customer.address.country} + ", " + $F{customer.address.postCode}
+                + ", " + $F{customer.address.city} + ", " + $F{customer.address.streetLine1}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="40" y="118" width="490" height="1" uuid="4f3133de-18de-4751-873d-c6b52a57b3fe"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="50" y="119" width="130" height="14" uuid="54079978-70a5-4291-9ea1-3cfa2c217159"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Description:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="295" y="119" width="130" height="14" uuid="36e635f0-a2f3-4477-8640-29776acc00ee"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Опис:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="104" y="119" width="176" height="14" uuid="fc8b50fb-fa8e-4dc6-b4a3-238be4aaf1a9"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="324" y="119" width="204" height="14" uuid="2582ebfa-735e-4357-b1b0-d799a969c6e9"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="40" y="133" width="490" height="1" uuid="8c4b7298-0c6e-4b13-8061-afb74f5b3fb0"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <line>
+                <reportElement x="41" y="46" width="490" height="1" uuid="82b69453-9e99-4cbf-bb5b-6306e34f0d88"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="50" y="134" width="130" height="14" uuid="3f0b11f6-1492-4d03-8398-7f6a401a4cf4"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Currency:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="97" y="134" width="186" height="14" uuid="8cf6acc8-48fe-4d39-9a14-bd4965834c0d"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <text><![CDATA[currency]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="295" y="134" width="130" height="14" uuid="5dfd3b3b-49f1-4b31-be12-15d54f2f8c4b"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Валюта:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="335" y="134" width="186" height="14" uuid="eabc67ae-fdc1-44f7-8030-268e582f927e"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <text><![CDATA[currency]]></text>
+            </staticText>
+            <line>
+                <reportElement x="40" y="148" width="490" height="1" uuid="c0d87006-3594-4f05-9f4f-783baf7e8fc7"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="50" y="148" width="130" height="14" uuid="a3034062-b3fe-4db4-9a49-afed973a7efc"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Price of the goods/services:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="295" y="148" width="130" height="14" uuid="20111298-0d62-473f-911e-e136d236fbb1"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Ціна товарів/послуг:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="171" y="149" width="112" height="14" uuid="94cc336f-3df4-40db-a3da-d48ff2c064b4"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{unitPrice}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="396" y="149" width="112" height="14" uuid="33398da1-9325-4709-ad30-548b8215247c"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{unitPrice}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="40" y="162" width="490" height="1" uuid="f790d2a6-fc26-4d0f-920e-adce45b6280b"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="40" y="163" width="490" height="30" uuid="e7059a7a-4170-4460-9344-b45c712eaecd"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Bank information:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="50" y="189" width="100" height="14" uuid="0bc053d9-c1fe-4e28-896e-5f240d14347d"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Beneficiary's Name:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="50" y="203" width="100" height="14" uuid="dc5c865a-8567-4e5b-b899-66e3553d4460"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Beneficiary's Address:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="50" y="217" width="100" height="14" uuid="94027190-b13b-4044-82b6-dfd03ea2caa7"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Id code:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="150" y="189" width="371" height="14" uuid="9c025ecd-a3d3-4140-9873-843cb5b9467f"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{supplier.name}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="150" y="203" width="371" height="14" uuid="9f5722db-b2f1-431b-8cc0-7d0b68a1ed82"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{supplier.address.country} + ", " + $F{supplier.address.postCode} + ", " + $F{supplier.address.city} + ", " + $F{supplier.address.streetLine1}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="150" y="217" width="371" height="14" uuid="d9854ae4-193f-4f0d-ae67-fd08c287cfc0"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{supplier.taxCode}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="50" y="231" width="100" height="14" uuid="e1073fe8-35a1-4985-8d2b-1a3b9dcdc946"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Account number: ]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="50" y="245" width="100" height="14" uuid="37f6a128-9e4e-4b1a-8e59-cfcf3de717c1"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Beneficiary’s bank:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="50" y="259" width="100" height="14" uuid="0136b3ac-6e58-4e0a-8ea5-8ecda3740730"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Bank Address: ]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="50" y="273" width="100" height="14" uuid="c4d8ed57-f43d-4916-b5f4-4415ad80605b"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[SWIFT code:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="150" y="231" width="371" height="14" uuid="4f585d94-c8dd-42ae-800d-82b87c76a426"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{bankAccount.accountNumber}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="150" y="245" width="371" height="14" uuid="6a748bed-dbd9-4947-8fc9-d033eb58148f"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{bankAccount.bankName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="150" y="259" width="371" height="14" uuid="08522c88-2d3b-408d-8fc3-26bbf966b1b3"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{bankAccount.addressLine}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="150" y="273" width="371" height="14" uuid="0d225a40-76c9-4912-ab7b-b7a9771d8497"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{bankAccount.swift}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="50" y="296" width="100" height="14" uuid="01143e2a-b788-4d0f-ae2e-d35eca0e4abb"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Correspondent Bank:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="50" y="310" width="100" height="14" uuid="a6cf7830-7d00-41ad-b2f4-ce2fafb3d8f0"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Bank Address:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="50" y="324" width="100" height="14" uuid="a168f5cd-5fd8-467f-9c50-e156db5faf35"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[SWIFT code:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="150" y="296" width="371" height="14" uuid="84be346f-eaed-4bee-83a7-6e21cbabf8be"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{bankAccount.correspondentName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="150" y="310" width="371" height="14" uuid="39a7ff21-95bb-46f2-9718-9253cf0dc521"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{bankAccount.correspondentAddress}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="150" y="324" width="371" height="14" uuid="0fb7ce18-93c0-4e76-8ef7-04fcf51a71ea"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{bankAccount.correspondentSwift}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="40" y="338" width="490" height="1" uuid="10a87bf1-13e0-4aa4-91d6-6d026dcfbdb1"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="113" splitType="Stretch">
+            <line>
+                <reportElement x="40" y="11" width="491" height="1" uuid="25b8ee02-e99c-4cfb-b2a0-30b40730223e"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <line>
+                <reportElement x="40" y="12" width="1" height="98" uuid="5cc728d8-5dea-4e3c-9f99-87233d7958a3"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="465" y="12" width="60" height="26" uuid="46f36ebd-63c5-4733-ac8d-6e7bcdd99724"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="9" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Amount, EUR
+Сума, Євро
+]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="370" y="11" width="90" height="27" uuid="032a7e46-ecff-4a9a-b00c-fba6731a8d08"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="9" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Price, EUR /Hour
+Ціна, Євро /година
+]]></text>
+            </staticText>
+            <line>
+                <reportElement x="41" y="38" width="490" height="1" uuid="6cd0bc75-9864-4088-b746-a02d0bd50da0"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <textField>
+                <reportElement x="68" y="39" width="209" height="14" uuid="b2b8c224-1665-4e2d-9b90-1034ae65d2b0"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="68" y="53" width="208" height="14" uuid="5f8d7001-f1dc-4e41-8c81-329c55cddd06"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="41" y="67" width="490" height="1" uuid="a654a57e-4ab5-47d6-9d17-27ba9fe82831"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <line>
+                <reportElement x="40" y="82" width="490" height="1" uuid="8d128d13-b4b6-465e-bb57-71d1102fe293"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <line>
+                <reportElement x="40" y="110" width="491" height="1" uuid="beba24a0-a1b2-4040-8007-9897f26a92d1"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <textField>
+                <reportElement x="149" y="83" width="192" height="14" uuid="303a4db3-4523-4718-b50f-642e49d9eaee"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="149" y="97" width="192" height="14" uuid="0e154e3e-298d-4181-b8b8-9b879be407ba"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="530" y="12" width="1" height="98" uuid="6720b16f-e8fe-41fe-a232-a83b8e186f05"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <line>
+                <reportElement x="460" y="12" width="1" height="98" uuid="ef5d6545-871e-4767-88d5-f347012a1bb6"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <line>
+                <reportElement x="364" y="12" width="1" height="55" uuid="04574aec-da59-4b73-b124-75957306d642"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="283" y="12" width="81" height="27" uuid="148e7381-b57c-4542-bafb-906c4ff09e28"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="9" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Quantity, hours /
+Кількість, годин
+]]></text>
+            </staticText>
+            <line>
+                <reportElement x="277" y="12" width="1" height="55" uuid="bb9a9fd2-c66b-4930-9542-38e47f701d68"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="68" y="12" width="81" height="27" uuid="ca7dd853-ae93-43fa-82d4-84c40140362b"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="9" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Description/
+Опис
+]]></text>
+            </staticText>
+            <line>
+                <reportElement x="62" y="11" width="1" height="56" uuid="20a89524-3a35-4afb-be20-c19c7abc8642"/>
+                <graphicElement>
+                    <pen lineWidth="0.6"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="41" y="11" width="21" height="27" uuid="8b9dc177-10cd-44ed-8941-b9b8e8bba840"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="9" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[№]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="41" y="39" width="21" height="28" uuid="66f214d2-a3df-416a-8611-3176eb7a9697"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="280" y="39" width="81" height="14" uuid="37b729a5-31a6-4fb3-ab80-b9d610fe63c3"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="364" y="38" width="94" height="14" uuid="f6a9cda4-1969-46c6-b50c-0b184ae88e42"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{unitPrice}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="460" y="39" width="68" height="14" uuid="3e90c862-550d-4cb8-8c2d-17b6fee48b8c"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="460" y="68" width="68" height="14" uuid="8e3f9147-40db-4563-8ce7-8a311f60ade7"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="460" y="82" width="68" height="14" uuid="4ce3fb04-2157-4ec7-b2a7-1f1f2287743f"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="377" y="67" width="81" height="16" uuid="e1ac17b0-95d9-436c-9a49-ef68efd756f5"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Total/Усього
+]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="50" y="83" width="130" height="14" uuid="64860c63-2a8e-4cb2-b34f-308a591298d7"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Total to pay:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="50" y="97" width="130" height="14" uuid="ea567016-cd41-4e8d-bc4c-df860e5163e7"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Усього до сплати:]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="164" splitType="Stretch">
+            <staticText>
+                <reportElement x="41" y="0" width="490" height="100" uuid="08cb70db-8608-48c7-a5cc-72ba2fae27be"/>
+                <textElement textAlignment="Left" verticalAlignment="Top">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="false" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Pay within 10 days/Сплатити протягом 10 днів.
+All charges of correspondent banks are at the Supplier’s expenses/
+Усі комісії банків-кореспондентів сплачує Виконавець.
+Please note, that payment according to this invoice at the same time is the confirmation of performed works, delivered services and final mutual installments between Parties without any additional documents. Also, it is to acknowledge that Parties have no claims to each other.
+Оплата згідно цього Інвойсу одночасно є підтвердженням виконаних робіт, наданих послуг, кінцевих розрахунків між Сторонами і того, що Сторони не мають взаємних претензій, і не вимагає підписання додаткових документів.
+]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="105" y="124" width="250" height="30" uuid="15622569-f3d1-4361-871b-01635723bd09"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="NewTimesNewRoman" size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["(" + $F{supplier.name} + "/ " + $F{supplier.name} + ")"]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>
