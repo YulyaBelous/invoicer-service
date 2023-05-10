@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+	<fontFamily name="NewTimesNewRoman">
+		<normal><![CDATA[fonts/NewTimesNewRoman/times.ttf]]></normal>
+		<bold><![CDATA[fonts/NewTimesNewRoman/timesbd.ttf]]></bold>
+		<pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+		<pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+		<exportFonts/>
+	</fontFamily>
+</fontFamilies>
