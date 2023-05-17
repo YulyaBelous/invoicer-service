@@ -61,6 +61,8 @@ public class Invoice {
     @JsonIgnoreProperties(value = { "invoicesCustomer", "invoicesSupplier" }, allowSetters = true)
     private Address addressCustomer;
 
+    private String username;
+
     public Long getId() {
         return id;
     }
@@ -166,4 +168,13 @@ public class Invoice {
     public void setAddressCustomer(Address addressCustomer) {
         this.addressCustomer = addressCustomer;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }

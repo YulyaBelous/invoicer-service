@@ -38,6 +38,8 @@ public class Customer {
     @JsonIgnoreProperties(value = { "supplier", "customer" }, allowSetters = true)
     private Set<BankAccount> bankAccounts = new HashSet<>();
 
+    private String username;
+
     public Long getId() {
         return id;
     }
@@ -101,4 +103,13 @@ public class Customer {
     public void setBankAccounts(Set<BankAccount> bankAccounts) {
         this.bankAccounts = bankAccounts;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }

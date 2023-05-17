@@ -1,7 +1,9 @@
 package com.example.invoicerservice.controllers;
 
 import com.example.invoicerservice.entities.BankAccount;
+import com.example.invoicerservice.entities.User;
 import com.example.invoicerservice.repository.IBankAccountRepository;
+import com.example.invoicerservice.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,23 +18,36 @@ public class BankAccountController {
     @Autowired
     private final IBankAccountRepository bankAccountRepository;
 
+    @Autowired
+    private final IUserRepository userRepository;
+
     private Pageable pageable;
 
-    public BankAccountController(IBankAccountRepository bankAccountRepository) {
+    public BankAccountController(IBankAccountRepository bankAccountRepository, IUserRepository userRepository) {
         this.bankAccountRepository = bankAccountRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/bank-accounts")
     public Page<BankAccount> getAllBankAccounts(@RequestParam("offset") Integer offset,
                                                 @RequestParam("limit") Integer limit,
                                                 @RequestParam("sortParam") String sortParam,
-                                                @RequestParam("sortDirect") String sortDirect) {
+                                                @RequestParam("sortDirect") String sortDirect,
+                                                @RequestParam("username") String username) {
         if(sortDirect.equals("asc")) {
             pageable = PageRequest.of(offset, limit, Sort.by(sortParam).ascending());
         } else if(sortDirect.equals("desc")) {
             pageable = PageRequest.of(offset, limit, Sort.by(sortParam).descending());
         }
-        return bankAccountRepository.findAll(pageable);
+        User user = userRepository.findByUsername(username).get();
+        Boolean isAdmin = user.getAuthorities().stream()
+                .filter(item -> item.getAuthority().equals("ROLE_ADMIN"))
+                .findFirst().isPresent();
+        if(isAdmin) {
+            return bankAccountRepository.findAll(pageable);
+        } else {
+            return bankAccountRepository.findByUsername(username, pageable);
+        }
     }
 
     @PostMapping("/bank-accounts")

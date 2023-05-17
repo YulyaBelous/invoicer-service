@@ -59,6 +59,8 @@ public class Address {
     @JsonIgnoreProperties(value = { "supplier", "customer", "addressSupplier", "addressCustomer", "bankAccountSupplier", "bankAccountCustomer" }, allowSetters = true)
     private Set<Invoice> invoicesSupplier = new HashSet<>();
 
+    private String username;
+
     public Long getId() {
         return id;
     }
@@ -170,4 +172,13 @@ public class Address {
     public void setInvoicesSupplier(Set<Invoice> invoicesSupplier) {
         this.invoicesSupplier = invoicesSupplier;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }
