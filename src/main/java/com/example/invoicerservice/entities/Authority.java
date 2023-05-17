@@ -1,5 +1,6 @@
 package com.example.invoicerservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -17,6 +18,7 @@ public class Authority implements GrantedAuthority {
     private String name;
 
     @ManyToMany(mappedBy="authorities")
+    @JsonIgnore
     private Set<User> users;
 
     public Authority() {};

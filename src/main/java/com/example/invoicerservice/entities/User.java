@@ -1,5 +1,6 @@
 package com.example.invoicerservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -30,6 +31,7 @@ public class User {
     private String lastName;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name="users_authority",
             joinColumns = { @JoinColumn(name="user_id", referencedColumnName="id") },

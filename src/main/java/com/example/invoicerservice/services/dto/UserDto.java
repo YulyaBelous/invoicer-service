@@ -1,8 +1,14 @@
 package com.example.invoicerservice.services.dto;
 
+import com.example.invoicerservice.entities.Authority;
+import com.example.invoicerservice.entities.User;
+
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserDto {
+
+    private Long id;
 
     private String username;
 
@@ -16,13 +22,22 @@ public class UserDto {
 
     private Set<String> authorities;
 
-    public UserDto(String username, String email, String password, String firstName, String lastName, Set<String> authorities) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.authorities = authorities;
+    public UserDto(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
