@@ -22,6 +22,8 @@ public class UserDto {
 
     private Set<String> authorities;
 
+    public UserDto() {}
+
     public UserDto(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
