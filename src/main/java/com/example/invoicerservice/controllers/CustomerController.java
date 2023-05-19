@@ -40,13 +40,13 @@ public class CustomerController {
             pageable = PageRequest.of(offset, limit, Sort.by(sortParam).descending());
         }
         User user = userRepository.findByUsername(username).get();
-        Boolean isAdmin = user.getAuthorities().stream()
-                .filter(item -> item.getAuthority().equals("ROLE_ADMIN"))
+        Boolean isCustomer = user.getAuthorities().stream()
+                .filter(item -> item.getAuthority().equals("ROLE_CUSTOMER"))
                 .findFirst().isPresent();
-        if(isAdmin) {
-            return customerRepository.findAll(pageable);
-        } else {
+        if(isCustomer) {
             return customerRepository.findByUsername(username, pageable);
+        } else {
+            return customerRepository.findAll(pageable);
         }
     }
     @PostMapping("/customers")

@@ -40,13 +40,13 @@ public class BankAccountController {
             pageable = PageRequest.of(offset, limit, Sort.by(sortParam).descending());
         }
         User user = userRepository.findByUsername(username).get();
-        Boolean isAdmin = user.getAuthorities().stream()
-                .filter(item -> item.getAuthority().equals("ROLE_ADMIN"))
+        Boolean isCustomer = user.getAuthorities().stream()
+                .filter(item -> item.getAuthority().equals("ROLE_CUSTOMER"))
                 .findFirst().isPresent();
-        if(isAdmin) {
-            return bankAccountRepository.findAll(pageable);
-        } else {
+        if(isCustomer) {
             return bankAccountRepository.findByUsername(username, pageable);
+        } else {
+            return bankAccountRepository.findAll(pageable);
         }
     }
 
