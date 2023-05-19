@@ -4,14 +4,11 @@ import com.example.invoicerservice.entities.Authority;
 import com.example.invoicerservice.entities.User;
 import com.example.invoicerservice.repository.IAuthorityRepository;
 import com.example.invoicerservice.repository.IUserRepository;
-import com.example.invoicerservice.response.MessageResponse;
 import com.example.invoicerservice.services.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,7 +33,7 @@ public class UserService {
     public void saveUser(UserDto userDto) {
 
         User user = new User(userDto.getUsername(), userDto.getEmail(),
-                encoder.encode(userDto.getPassword()), userDto.getFirstName(), userDto.getLastName());
+                encoder.encode(userDto.getPassword()), userDto.getFirstName(), userDto.getLastName(), userDto.isActivated());
 
         if (userDto.getAuthorities() != null) {
             Set<Authority> authorities = userDto
@@ -62,6 +59,7 @@ public class UserService {
                     user.setUsername(userDTO.getUsername());
                     user.setFirstName(userDTO.getFirstName());
                     user.setLastName(userDTO.getLastName());
+                    user.setActivated(userDTO.isActivated());
                     if (userDTO.getEmail() != null) {
                         user.setEmail(userDTO.getEmail());
                     }

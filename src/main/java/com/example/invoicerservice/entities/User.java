@@ -30,6 +30,9 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Column(name = "activated", nullable = false)
+    private boolean activated = false;
+
     @ManyToMany
     @JsonIgnore
     @JoinTable(
@@ -40,12 +43,13 @@ public class User {
 
     public User() {}
 
-    public User(String username, String email, String password, String firstName, String lastName) {
+    public User(String username, String email, String password, String firstName, String lastName, boolean activated) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.activated = activated;
     }
 
     public Long getId() {
@@ -94,6 +98,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     public Set<Authority> getAuthorities() {

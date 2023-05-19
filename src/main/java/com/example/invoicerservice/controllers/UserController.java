@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
 
         if (userRepository.existsByUsername(userDto.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: username is already taken!"));
@@ -71,17 +71,17 @@ public class UserController {
 
         Optional<User> existsUsername = userRepository.findByUsername(userDto.getUsername());
         if (existsUsername.isPresent() && !existsUsername.get().getUsername().equals(userDto.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: username is already taken!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Username is already taken!"));
         }
 
         User existsEmail = userRepository.findByEmail(userDto.getEmail());
         if (existsEmail != null && !existsEmail.getEmail().equals(userDto.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Email is already in use!"));
         }
 
         userService.updateUser(userDto);
 
-        return ResponseEntity.ok(new MessageResponse("changes saved successfully!"));
+        return ResponseEntity.ok(new MessageResponse("Changes saved successfully!"));
     }
 
     @DeleteMapping("/users/{id}")

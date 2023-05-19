@@ -11,9 +11,10 @@ public class JwtResponse {
     private String email;
     private String firstName;
     private String lastName;
+    private boolean activated;
     private List<String> authorities;
 
-    public JwtResponse(String accessToken, Long id, String username, String email, List<String> authorities, String firstName, String lastName) {
+    public JwtResponse(String accessToken, Long id, String username, String email, List<String> authorities, String firstName, String lastName, boolean activated) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
@@ -21,6 +22,7 @@ public class JwtResponse {
         this.authorities = authorities;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.activated = activated;
     }
 
     public String getAccessToken() {
@@ -85,5 +87,13 @@ public class JwtResponse {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 }

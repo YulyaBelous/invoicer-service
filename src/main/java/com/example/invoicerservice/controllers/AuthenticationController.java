@@ -49,16 +49,16 @@ public class AuthenticationController {
     @PostMapping("/registration")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) {
         if (userRepository.existsByUsername(userDto.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: username is already taken!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Username is already taken!"));
         }
 
         if (userRepository.existsByEmail(userDto.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Email is already in use!"));
         }
 
         userService.saveUser(userDto);
 
-        return ResponseEntity.ok(new MessageResponse("user registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
     @PostMapping("/login")
@@ -73,6 +73,6 @@ public class AuthenticationController {
                 .collect(Collectors.toList());
 
         return ResponseEntity
-                .ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), authorities, userDetails.getFirstName(), userDetails.getLastName()));
+                .ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), authorities, userDetails.getFirstName(), userDetails.getLastName(), userDetails.isActivated()));
     }
 }

@@ -20,6 +20,8 @@ public class UserDto {
 
     private String lastName;
 
+    private boolean activated;
+
     private Set<String> authorities;
 
     public UserDto() {}
@@ -31,6 +33,7 @@ public class UserDto {
         this.password = user.getPassword();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
+        this.activated = user.isActivated();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
     }
 
@@ -80,6 +83,14 @@ public class UserDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     public Set<String> getAuthorities() {

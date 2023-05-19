@@ -1,16 +1,14 @@
 package com.example.invoicerservice.controllers;
 
 import com.example.invoicerservice.entities.Authority;
+import com.example.invoicerservice.entities.Supplier;
 import com.example.invoicerservice.repository.IAuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -34,5 +32,23 @@ public class AuthorityController {
         }
 
         return authorityRepository.findAll(pageable);
+    }
+
+    @PostMapping("/authorities")
+    public Long createAuthority(@RequestBody Authority authority) {
+        authorityRepository.save(authority);
+        return authority.getId();
+    }
+
+    @PutMapping("/authorities/{id}")
+    public Long updateAuthority(@RequestBody Authority authority, @PathVariable("id") Long id) {
+        authorityRepository.save(authority);
+        return authority.getId();
+    }
+
+    @DeleteMapping("/authorities/{id}")
+    private void deleteAuthority(@PathVariable("id") Long id)
+    {
+        authorityRepository.deleteById(id);
     }
 }
