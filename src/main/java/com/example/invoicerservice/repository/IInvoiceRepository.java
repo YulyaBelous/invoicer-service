@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface IInvoiceRepository extends JpaRepository<Invoice, Long> {
 
     Page<Invoice> findByUsername(String username, Pageable pageable);
+
 }

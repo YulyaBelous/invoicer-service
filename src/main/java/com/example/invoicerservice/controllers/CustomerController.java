@@ -29,10 +29,10 @@ public class CustomerController {
     }
 
     @GetMapping("/customers")
-    public Page<Customer> getAllCustomers(@RequestParam("offset") Integer offset,
-                                          @RequestParam("limit") Integer limit,
-                                          @RequestParam("sortParam") String sortParam,
-                                          @RequestParam("sortDirect") String sortDirect,
+    public Page<Customer> getAllCustomers(@RequestParam(defaultValue = "0") Integer offset,
+                                          @RequestParam(defaultValue = "50") Integer limit,
+                                          @RequestParam(defaultValue = "id") String sortParam,
+                                          @RequestParam(defaultValue = "asc") String sortDirect,
                                           @RequestParam("username") String username) {
         if(sortDirect.equals("asc")) {
             pageable = PageRequest.of(offset, limit, Sort.by(sortParam).ascending());

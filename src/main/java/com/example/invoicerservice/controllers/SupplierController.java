@@ -32,10 +32,10 @@ public class SupplierController {
     }
 
     @GetMapping("/suppliers")
-    public Page<Supplier> getAllSuppliers(@RequestParam("offset") Integer offset,
-                                          @RequestParam("limit") Integer limit,
-                                          @RequestParam("sortParam") String sortParam,
-                                          @RequestParam("sortDirect") String sortDirect,
+    public Page<Supplier> getAllSuppliers(@RequestParam(defaultValue = "0") Integer offset,
+                                          @RequestParam(defaultValue = "25") Integer limit,
+                                          @RequestParam(defaultValue = "id") String sortParam,
+                                          @RequestParam(defaultValue = "asc") String sortDirect,
                                           @RequestParam("username") String username) {
         if(sortDirect.equals("asc")) {
             pageable = PageRequest.of(offset, limit, Sort.by(sortParam).ascending());

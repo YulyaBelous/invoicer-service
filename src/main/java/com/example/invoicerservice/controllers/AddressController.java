@@ -29,10 +29,10 @@ public class AddressController {
     }
 
     @GetMapping("/addresses")
-    public Page<Address> getAllAddresses(@RequestParam("offset") Integer offset,
-                                         @RequestParam("limit") Integer limit,
-                                         @RequestParam("sortParam") String sortParam,
-                                         @RequestParam("sortDirect") String sortDirect,
+    public Page<Address> getAllAddresses(@RequestParam(defaultValue = "0") Integer offset,
+                                         @RequestParam(defaultValue = "25") Integer limit,
+                                         @RequestParam(defaultValue = "id") String sortParam,
+                                         @RequestParam(defaultValue = "asc") String sortDirect,
                                          @RequestParam("username") String username) {
         if(sortDirect.equals("asc")) {
             pageable = PageRequest.of(offset, limit, Sort.by(sortParam).ascending());
@@ -40,13 +40,13 @@ public class AddressController {
             pageable = PageRequest.of(offset, limit, Sort.by(sortParam).descending());
         }
         User user = userRepository.findByUsername(username).get();
-        Boolean isCustomer = user.getAuthorities().stream()
-                .filter(item -> item.getAuthority().equals("ROLE_CUSTOMER"))
+        Boolean isAdmin = user.getAuthorities().stream()
+                .filter(item -> item.getAuthority().equals("ROLE_ADMIN"))
                 .findFirst().isPresent();
-        if(isCustomer) {
-            return addressRepository.findByUsername(username, pageable);
-        } else {
+        if(isAdmin) {
             return addressRepository.findAll(pageable);
+        } else {
+            return addressRepository.findByUsername(username, pageable);
         }
     }
 
