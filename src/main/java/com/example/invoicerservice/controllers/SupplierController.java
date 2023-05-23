@@ -1,17 +1,24 @@
 package com.example.invoicerservice.controllers;
 
+import com.example.invoicerservice.entities.Authority;
+import com.example.invoicerservice.entities.Customer;
 import com.example.invoicerservice.entities.Supplier;
 import com.example.invoicerservice.entities.User;
+import com.example.invoicerservice.repository.ICustomerRepository;
 import com.example.invoicerservice.repository.ISupplierRepository;
 import com.example.invoicerservice.repository.IUserRepository;
+import com.example.invoicerservice.services.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,12 +29,16 @@ public class SupplierController {
     private final ISupplierRepository supplierRepository;
 
     @Autowired
+    private final ICustomerRepository customerRepository;
+
+    @Autowired
     private final IUserRepository userRepository;
 
     private Pageable pageable;
 
-    public SupplierController(ISupplierRepository supplierRepository, IUserRepository userRepository) {
+    public SupplierController(ISupplierRepository supplierRepository, ICustomerRepository customerRepository, IUserRepository userRepository) {
         this.supplierRepository = supplierRepository;
+        this.customerRepository = customerRepository;
         this.userRepository = userRepository;
     }
 
@@ -60,7 +71,10 @@ public class SupplierController {
     }
 
     @PutMapping("/suppliers/{id}")
+    @Transactional
     public Long updateSupplier(@RequestBody Supplier supplier, @PathVariable("id") Long id) {
+
+
         supplierRepository.save(supplier);
         return supplier.getId();
     }

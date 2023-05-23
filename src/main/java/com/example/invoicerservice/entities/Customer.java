@@ -1,5 +1,6 @@
 package com.example.invoicerservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -37,6 +38,10 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     @JsonIgnoreProperties(value = { "supplier", "customer" }, allowSetters = true)
     private Set<BankAccount> bankAccounts = new HashSet<>();
+
+    @ManyToMany(mappedBy="availableCustomers")
+    @JsonIgnore
+    private Set<Supplier> suppliers;
 
     private String username;
 
@@ -112,4 +117,11 @@ public class Customer {
         this.username = username;
     }
 
+    public Set<Supplier> getSuppliers() {
+        return suppliers;
+    }
+
+    public void setSuppliers(Set<Supplier> suppliers) {
+        this.suppliers = suppliers;
+    }
 }

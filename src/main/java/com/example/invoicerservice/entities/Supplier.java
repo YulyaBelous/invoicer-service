@@ -1,10 +1,12 @@
 package com.example.invoicerservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "supplier")
@@ -38,6 +40,14 @@ public class Supplier {
     @OneToMany(mappedBy = "supplier")
     @JsonIgnoreProperties(value = { "supplier", "customer" }, allowSetters = true)
     private Set<BankAccount> bankAccounts = new HashSet<>();
+
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable(
+            name="available_customer",
+            joinColumns = { @JoinColumn(name="supplier_id", referencedColumnName="id") },
+            inverseJoinColumns = { @JoinColumn(name="customer_name", referencedColumnName="name") } )
+    private Set<Customer> availableCustomers = new HashSet<>();
 
     private String username;
 
@@ -113,4 +123,11 @@ public class Supplier {
         this.username = username;
     }
 
+    public Set<Customer> getAvailableCustomers() {
+        return availableCustomers;
+    }
+
+    public void setAvailableCustomers(Set<Customer> availableCustomers) {
+        this.availableCustomers = availableCustomers;
+    }
 }
