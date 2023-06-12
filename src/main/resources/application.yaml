@@ -1,4 +1,0 @@
-example:
-  app:
-    jwtExpirationMs: 76300000
-    jwtSecret: knowledgeFactory

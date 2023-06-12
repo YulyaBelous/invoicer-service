@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/invoice_database
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+
+example:
+  app:
+    jwtExpirationMs: 76300000
+    jwtSecret: knowledgeFactory

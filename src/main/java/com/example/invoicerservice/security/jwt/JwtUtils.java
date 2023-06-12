@@ -1,6 +1,6 @@
 package com.example.invoicerservice.security.jwt;
 
-import com.example.invoicerservice.security.services.UserDetailsImpl;
+import com.example.invoicerservice.security.CustomUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,13 +13,17 @@ import io.jsonwebtoken.*;
 
 @Component
 public class JwtUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+
     @Value("${example.app.jwtExpirationMs}")
     private int jwtExpirationMs;
+
     @Value("${example.app.jwtSecret}")
     private String jwtSecret;
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+
     public boolean validateJwtToken(String authToken) {
+
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
@@ -40,7 +44,7 @@ public class JwtUtils {
 
     public String generateJwtToken(Authentication authentication) {
 
-        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+        CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
 
         return Jwts.builder().setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
@@ -50,6 +54,7 @@ public class JwtUtils {
     }
 
     public String getUserNameFromJwtToken(String token) {
+
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
