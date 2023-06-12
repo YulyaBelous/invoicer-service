@@ -8,6 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * The BankAccountController class is a Spring REST controller that provides endpoints for managing bank accounts.
+ * It handles HTTP requests and responses for the /api/bank-accounts endpoint, which allows users to retrieve, create,
+ * update, and delete bank accounts.
+ */
 @RestController
 @RequestMapping("/api")
 public class BankAccountController {
@@ -23,6 +28,16 @@ public class BankAccountController {
         this.controllerService = controllerService;
     }
 
+    /**
+     * Returns a page of bank accounts based on the specified query parameters and username.
+     *
+     * @param offset the offset of the page
+     * @param limit the limit of the page
+     * @param sortParam the parameter to sort by
+     * @param sortDirect the direction to sort in
+     * @param username the username of the user
+     * @return a page of bank accounts
+     */
     @GetMapping("/bank-accounts")
     public Page<BankAccount> getAllBankAccounts(@RequestParam(defaultValue = "0") Integer offset,
                                                 @RequestParam(defaultValue = "25") Integer limit,
@@ -39,6 +54,12 @@ public class BankAccountController {
         }
     }
 
+    /**
+     * Creates a new bank account with the specified details.
+     *
+     * @param bankAccount the bank account to create
+     * @return the ID of the created bank account
+     */
     @PostMapping("/bank-accounts")
     public Long createBankAccount(@RequestBody BankAccount bankAccount) {
 
@@ -46,6 +67,13 @@ public class BankAccountController {
         return bankAccount.getId();
     }
 
+    /**
+     * Updates an existing bank account with the specified ID and details.
+     *
+     * @param bankAccount the updated bank account
+     * @param id the ID of the bank account to update
+     * @return the ID of the updated bank account
+     */
     @PutMapping("/bank-accounts/{id}")
     public Long updateCustomer(@RequestBody BankAccount bankAccount, @PathVariable("id") Long id) {
 
@@ -53,6 +81,11 @@ public class BankAccountController {
         return bankAccount.getId();
     }
 
+    /**
+     * Deletes an existing bank account with the specified ID.
+     *
+     * @param id the ID of the bank account to delete
+     */
     @DeleteMapping("/bank-accounts/{id}")
     private void deleteBankAccount(@PathVariable("id") Long id) {
 

@@ -15,6 +15,11 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * The SupplierController class is a Spring REST controller that provides endpoints for managing suppliers.
+ * It handles HTTP requests and responses for the /api/suppliers endpoint, which allows users to retrieve, create,
+ * update, and delete suppliers.
+ */
 @RestController
 @RequestMapping("/api")
 public class SupplierController {
@@ -33,6 +38,16 @@ public class SupplierController {
         this.controllerService = controllerService;
     }
 
+    /**
+     * Returns a page of suppliers based on the specified query parameters and username.
+     *
+     * @param offset the offset of the page
+     * @param limit the limit of the page
+     * @param sortParam the parameter to sort by
+     * @param sortDirect the direction to sort in
+     * @param username the username of the user
+     * @return a page of suppliers
+     */
     @GetMapping("/suppliers")
     public Page<SupplierDto> getAllSuppliers(@RequestParam(defaultValue = "0") Integer offset,
                                              @RequestParam(defaultValue = "25") Integer limit,
@@ -49,6 +64,12 @@ public class SupplierController {
         }
     }
 
+    /**
+     * Creates a new supplier with the specified details.
+     *
+     * @param supplier the supplier to create
+     * @return the ID of the created supplier
+     */
     @PostMapping("/suppliers")
     public Long createSupplier(@RequestBody Supplier supplier) {
 
@@ -56,14 +77,24 @@ public class SupplierController {
         return supplier.getId();
     }
 
+    /**
+     * Updates an existing supplier with the specified ID and details.
+     *
+     * @param supplierDto the updated supplier
+     * @param id the ID of the supplier to update
+     * @return the ID of the updated supplier
+     */
     @PutMapping("/suppliers/{id}")
     public Long updateSupplier(@RequestBody SupplierDto supplierDto, @PathVariable("id") Long id) {
 
+        // Find the supplier with the specified ID in the database
         Optional<Supplier> supplierOptional = Optional
                 .of(supplierRepository.findById(id))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(supplier -> {
+
+                    // Update the supplier details with the values from the SupplierDto object
                     supplier.setName(supplierDto.getName());
                     supplier.setShortName(supplierDto.getShortName());
                     supplier.setFullName(supplierDto.getFullName());
@@ -72,6 +103,8 @@ public class SupplierController {
                     supplier.setInvoices(new HashSet(supplierDto.getInvoices()));
                     supplier.setAddresses(new HashSet(supplierDto.getAddresses()));
                     supplier.setBankAccounts(new HashSet(supplierDto.getBankAccounts()));
+
+                    // Update the available customers for the supplier
                     Set<Customer> managedAvailableCustomer = supplier.getAvailableCustomers();
                     managedAvailableCustomer.clear();
                     supplierDto
@@ -81,13 +114,21 @@ public class SupplierController {
                             .filter(Optional::isPresent)
                             .map(Optional::get)
                             .forEach(managedAvailableCustomer::add);
+
+                    // Return the updated supplier object
                     return supplier;
                 });
 
+        // Save the updated supplier object to the database and return its ID
         supplierRepository.save(supplierOptional.get());
         return supplierOptional.get().getId();
     }
 
+    /**
+     * Deletes an existing supplier with the specified ID.
+     *
+     * @param id the ID of the supplier to delete
+     */
     @DeleteMapping("/suppliers/{id}")
     private void deleteSupplier(@PathVariable("id") Long id) {
 

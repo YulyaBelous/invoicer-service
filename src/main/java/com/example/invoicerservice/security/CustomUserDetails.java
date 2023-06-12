@@ -10,6 +10,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * The CustomUserDetails class implements the UserDetails interface and represents a custom user object that contains
+ * the user's authentication details.
+ *
+ * The class is used by the CustomUserDetailsService to load user details from the database and by the JwtUtils class
+ * to generate and validate JSON Web Tokens (JWTs).
+ */
 public class CustomUserDetails implements UserDetails {
 
     private static final long serialVersionUID = 1L;
@@ -35,11 +42,20 @@ public class CustomUserDetails implements UserDetails {
         this.authorities = authorities;
     }
 
+    /**
+     * Builds a new CustomUserDetails object from the specified User object.
+     *
+     * @param user the User object to build from
+     * @return a new CustomUserDetails object
+     */
     public static CustomUserDetails build(User user) {
 
+        // Map the user's authorities to a list of GrantedAuthority objects
         List<GrantedAuthority> authorities = user.getAuthorities().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
+
+        // Create a new CustomUserDetails object with the user's details and authorities
         return new CustomUserDetails(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.isActivated(), authorities);
     }
 

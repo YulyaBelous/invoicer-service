@@ -11,6 +11,11 @@ import java.util.Date;
 
 import io.jsonwebtoken.*;
 
+/**
+ * The JwtUtils class is responsible for generating and validating JSON Web Tokens (JWTs) in the application. It
+ * contains methods for generating a JWT token from a user's authentication details, validating a JWT token, and
+ * extracting the username from a JWT token.
+ */
 @Component
 public class JwtUtils {
 
@@ -22,10 +27,19 @@ public class JwtUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
+    /**
+     * Validates a JWT token by parsing its claims and verifying its signature.
+     *
+     * @param authToken the JWT token to validate
+     * @return true if the token is valid, false otherwise
+     */
     public boolean validateJwtToken(String authToken) {
 
         try {
+            // Parse the JWT token and verify its signature using the secret key
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+
+            // Return true if the token is valid
             return true;
         } catch (SignatureException e) {
             logger.error("Invalid JWT signature: {}", e.getMessage());
@@ -39,13 +53,22 @@ public class JwtUtils {
             logger.error("JWT claims string is empty: {}", e.getMessage());
         }
 
+        // Return false if the token is invalid
         return false;
     }
 
+    /**
+     * Generates a JWT token from a user's authentication details.
+     *
+     * @param authentication the user's authentication details
+     * @return the JWT token
+     */
     public String generateJwtToken(Authentication authentication) {
 
+        // Get the user details from the authentication object
         CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
 
+        // Build the JWT token with the user's username, current date and the expiration date
         return Jwts.builder().setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
@@ -53,8 +76,15 @@ public class JwtUtils {
                 .compact();
     }
 
+    /**
+     * Extracts the username from a JWT token.
+     *
+     * @param token the JWT token
+     * @return the username
+     */
     public String getUserNameFromJwtToken(String token) {
 
+        // Parse the JWT token and extract the subject (username) from its claims
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
