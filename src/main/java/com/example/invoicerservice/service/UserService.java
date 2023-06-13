@@ -37,7 +37,7 @@ public class UserService {
      *
      * @param userDto the UserDto object containing the user data to save
      */
-    public void saveUser(UserDto userDto) {
+    public User saveUser(UserDto userDto) {
 
         // Create a new User object with the specified user data
         User user = new User(userDto.getUsername(), userDto.getEmail(),
@@ -57,6 +57,8 @@ public class UserService {
 
         // Save the user to the database
         userRepository.save(user);
+
+        return user;
     }
 
     /**
@@ -64,7 +66,7 @@ public class UserService {
      *
      * @param userDTO the UserDto object containing the updated user data
      */
-    public void updateUser(UserDto userDTO) {
+    public User updateUser(UserDto userDTO) {
 
         // Find the user with the specified ID
         Optional<User> userOptional = Optional
@@ -95,6 +97,7 @@ public class UserService {
         // Save the updated user to the database
         userRepository.save(userOptional.get());
 
+        return userOptional.get();
     }
 
 }
